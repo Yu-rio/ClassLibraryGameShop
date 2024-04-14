@@ -1,11 +1,6 @@
 ﻿using ClassLibraryGameShop;
 using LinqToDB;
 using LinqToDB.DataProvider.SqlServer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestShop
 {
@@ -18,7 +13,7 @@ namespace TestShop
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
                 if (GetCartItemByProductIdAndCartId(productId, cartId) != null)
-                    return 0; 
+                    return 0;
                 else
                     return db.GetTable<CartItem>()
                              .Value(ci => ci.Price, price)
@@ -33,7 +28,9 @@ namespace TestShop
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
-                return db.GetTable<CartItem>().ToList();
+                return db.GetTable<CartItem>()
+                         .LoadWith(lw => lw.Product)
+                         .LoadWith(lw => lw.Cart).ToList();
             }
         }
 
@@ -43,6 +40,8 @@ namespace TestShop
             {
                 return db.GetTable<CartItem>()
                          .Where(ci => ci.ProductId == productId && ci.CartId == cartId)
+                         .LoadWith(lw => lw.Product)
+                         .LoadWith(lw => lw.Cart)
                          .FirstOrDefault();
             }
         }

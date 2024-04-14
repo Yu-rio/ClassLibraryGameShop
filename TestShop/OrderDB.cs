@@ -32,7 +32,7 @@ namespace TestShop
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
-                return db.GetTable<Order>().ToList();
+                return db.GetTable<Order>().LoadWith(lw => lw.Customer).ToList();
             }
         }
 
@@ -50,7 +50,7 @@ namespace TestShop
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
-                return db.GetTable<Order>()
+                return db.GetTable<Order>().LoadWith(lw => lw.Customer)
                          .Where(o => o.CustomerId == customerId)
                          .ToList();
             }

@@ -32,7 +32,7 @@ namespace TestShop
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
-                return db.GetTable<ShipmentItem>().ToList();
+                return db.GetTable<ShipmentItem>().LoadWith(lw => lw.Product).LoadWith(lw => lw.Shipment).ToList();
             }
         }
 
@@ -40,7 +40,7 @@ namespace TestShop
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
-                return db.GetTable<ShipmentItem>()
+                return db.GetTable<ShipmentItem>().LoadWith(lw => lw.Product).LoadWith(lw => lw.Shipment)
                          .Where(si => si.ShipmentId == shipmentId && si.ProductId == productId)
                          .FirstOrDefault();
             }

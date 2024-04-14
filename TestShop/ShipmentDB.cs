@@ -31,7 +31,7 @@ namespace TestShop
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
-                return db.GetTable<Shipment>().ToList();
+                return db.GetTable<Shipment>().LoadWith(lw => lw.Warehouse).LoadWith(lw => lw.Supplier).ToList();
             }
         }
 
