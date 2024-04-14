@@ -27,8 +27,5 @@ namespace ClassLibraryGameShop
 
         [Association(ThisKey = "SupplierId", OtherKey = "SupplierId")]
         public Supplier Supplier { get; set; }
-
-        [Association(ThisKey = "TransactionId", OtherKey = "TransactionId")]
-        public Transaction Transaction { get; set; }
     }
 }

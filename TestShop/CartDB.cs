@@ -28,7 +28,7 @@ namespace TestShop
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
-                return db.GetTable<Cart>().ToList();
+                return db.GetTable<Cart>().LoadWith(lw => lw.Customer).ToList();
             }
         }
 
@@ -39,7 +39,6 @@ namespace TestShop
                 return db.GetTable<Cart>()
                     .Where(c => c.CartId == id)
                     .FirstOrDefault();
-
             }
         }
 

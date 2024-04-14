@@ -13,9 +13,7 @@ namespace TestShop
             {
                 var warehhouseDb = new WarehouseDB().GetById(warehouseId);
                 var supplierDb = new SupplierDB().GetById(supplierId);
-                var transactionDb = new TransactionDB().GetById(transactionId);
-                if (GetById(shipmentId) != null || warehhouseDb == null
-                    || supplierDb == null || transactionDb == null)
+                if (GetById(shipmentId) != null || warehhouseDb == null || supplierDb == null)
                     return 0;
                 else
                     return db.GetTable<Shipment>()
@@ -47,14 +45,22 @@ namespace TestShop
             }
         }
 
+       public Shipment GetByTransactionId(string transactionId)
+        {
+            using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
+            {
+                return db.GetTable<Shipment>()
+                         .Where(s => s.TransactionId == transactionId)
+                         .FirstOrDefault();
+            }
+        }
         public int Update(string shipmentId, DateTime dateAndTime, float? sum, string warehouseId, string supplierId, string transactionId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
                 var warehhouseDb = new WarehouseDB().GetById(warehouseId);
                 var supplierDb = new SupplierDB().GetById(supplierId);
-                var transactionDb = new TransactionDB().GetById(transactionId);
-                if (warehhouseDb == null || supplierDb == null || transactionDb == null)
+                if (warehhouseDb == null || supplierDb == null)
                     return 0;
                 else
                     return db.GetTable<Shipment>()

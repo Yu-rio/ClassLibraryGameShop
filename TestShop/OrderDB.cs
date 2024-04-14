@@ -12,9 +12,8 @@ namespace TestShop
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
                 var customerDb = new CustomerDB().GetById(customerId);
-                var transactionDb = new TransactionDB().GetById(transactionId);
                 var deliveryDb = new DeliveryDB().GetById(deliveryId);
-                if (GetById(orderId) != null || customerDb == null || transactionDb == null || deliveryDb == null)
+                if (GetById(orderId) != null || customerDb == null || deliveryDb == null)
                     return 0;
                 else
                     return db.GetTable<Order>()
@@ -62,9 +61,8 @@ namespace TestShop
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
                 var customerDb = new CustomerDB().GetById(customerId);
-                var transactionDb = new TransactionDB().GetById(transactionId);
                 var deliveryDb = new DeliveryDB().GetById(deliveryId);
-                if (customerDb == null || transactionDb == null || deliveryDb == null)
+                if (customerDb == null || deliveryDb == null)
                     return 0;
                 else
                     return db.GetTable<Order>()
