@@ -6,7 +6,7 @@ namespace TestShop
 {
     public class ShipmentDB
     {
-        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;";
+        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
         public int Create(string shipmentId, DateTime dateAndTime, float? sum, string warehouseId, string supplierId, string transactionId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))

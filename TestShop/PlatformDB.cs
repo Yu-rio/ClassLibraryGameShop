@@ -11,7 +11,7 @@ namespace TestShop
 {
     public class PlatformDB
     {
-        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;";
+        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
         public int Create(string platformId, string platformName)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
@@ -48,7 +48,7 @@ namespace TestShop
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
                 return db.GetTable<Platform>()
-                         .Where(p => p.PlatformName == platformName)
+                         .Where(p => p.PlatformName.StartsWith(platformName))
                          .FirstOrDefault();
             }
         }

@@ -12,7 +12,7 @@ namespace TestShop
 {
     public class PublisherDB
     {
-        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;";
+        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
         public int Create(string publisherId, string publisherName, string categoryId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
@@ -52,7 +52,7 @@ namespace TestShop
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
                 return db.GetTable<Publisher>()
-                         .Where(p => p.PublisherName == publisherName)
+                         .Where(p => p.PublisherName.StartsWith(publisherName))
                          .FirstOrDefault();
             }
         }

@@ -11,7 +11,7 @@ namespace TestShop
 {
     public class OrderItemDB
     {
-        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;";
+        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public int CreateOrderItem(float? price, int? quantity, string productId, string orderId)
         {

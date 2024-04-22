@@ -13,7 +13,7 @@ namespace TestShop
 {
     public class CategoryDB
     {
-        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;";
+        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public int Create(string id, string name)
         {
@@ -52,7 +52,7 @@ namespace TestShop
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
                 return db.GetTable<Category>()
-                    .Where(c => c.CategoryName == categoryName)
+                    .Where(c => c.CategoryName.StartsWith(categoryName))
                     .FirstOrDefault();
             }
         }

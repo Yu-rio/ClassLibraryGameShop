@@ -26,7 +26,6 @@ namespace TestShop
         public ITable<Shipment> shipment => this.GetTable<Shipment>();
         public ITable<ShipmentItem> shipmentItem => this.GetTable<ShipmentItem>();
         public ITable<Supplier> supplier => this.GetTable <Supplier>();
-        public ITable<Transaction> transaction => this.GetTable<Transaction>();
         public ITable<Warehouse> warehouse => this.GetTable<Warehouse>();
     }
 }

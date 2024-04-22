@@ -11,7 +11,7 @@ namespace TestShop
 {
     public class GenreDB
     {
-        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;";
+        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
         public int Create(string genreId, string genreName, string categoryId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
@@ -50,7 +50,7 @@ namespace TestShop
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
                 return db.GetTable<Genre>()
-                         .Where(g => g.GenreName == genreName)
+                         .Where(g => g.GenreName.StartsWith(genreName))
                          .FirstOrDefault();
             }
         }

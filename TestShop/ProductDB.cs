@@ -6,7 +6,7 @@ namespace TestShop
 {
     class ProductDB
     {
-        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;";
+        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
         public int Create(string productId, string title, string trailerLink, int? quantity, float price, string content, string categoryId, string publisherId, string genreId, string platformId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
@@ -15,7 +15,7 @@ namespace TestShop
                 var publisherDb = new PublisherDB().GetById(publisherId);
                 var platformDb = new PlatformDB().GetById(platformId);
                 var genreDb = new GenreDB().GetById(genreId);
-                if (GetById(productId) != null || categoryDb == null || categoryDb == null || platformDb ==null || genreDb==null)
+                if (GetById(productId) != null || categoryDb == null || publisherDb == null || platformDb ==null || genreDb==null)
                     return 0; 
                 else
                     return db.GetTable<Product>()
@@ -60,7 +60,7 @@ namespace TestShop
                 var publisherDb = new PublisherDB().GetById(publisherId);
                 var platformDb = new PlatformDB().GetById(platformId);
                 var genreDb = new GenreDB().GetById(genreId);
-                if (categoryDb == null || categoryDb == null || platformDb == null || genreDb == null)
+                if (categoryDb == null || publisherDb == null || platformDb == null || genreDb == null)
                     return 0;
                 else
                     return db.GetTable<Product>()

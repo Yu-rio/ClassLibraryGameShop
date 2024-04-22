@@ -6,7 +6,7 @@ namespace TestShop
 {
     public class CartBD
     {
-        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;";
+        private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
         public int Create(string id, DateTime createdAt, string customerId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
