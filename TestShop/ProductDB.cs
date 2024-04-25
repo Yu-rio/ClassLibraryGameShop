@@ -4,7 +4,7 @@ using LinqToDB.DataProvider.SqlServer;
 
 namespace TestShop
 {
-    class ProductDB
+    public class ProductDB
     {
         private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
         public int Create(string productId, string title, string trailerLink, int? quantity, float price, string content, string categoryId, string publisherId, string genreId, string platformId)
