@@ -13,7 +13,7 @@ namespace TestShop
     {
         private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
 
-        public int CreateOrderItem(float? price, int? quantity, string productId, string orderId)
+        public int Create(float? price, int? quantity, string productId, string orderId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
             {
