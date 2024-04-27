@@ -4,7 +4,7 @@ using LinqToDB.DataProvider.SqlServer;
 
 namespace TestShop
 {
-    public class CartBD
+    public class CartDB
     {
         private const string CONNECTION_STRING = @"Server=DESKTOP-4DJEC1V\MSSQLSERVER01;DataBase=GameShop;Trusted_Connection=True;TrustServerCertificate=True;";
         public int Create(string id, DateTime createdAt, string customerId)
