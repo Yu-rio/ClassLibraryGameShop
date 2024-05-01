@@ -46,7 +46,14 @@ namespace TestShop
                          .FirstOrDefault();
             }
         }
-
+        public List<OrderItem> GetByOrderId(string orderId)
+        {
+            using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
+            {
+                return db.GetTable<OrderItem>().LoadWith(lw => lw.Product).LoadWith(lw => lw.Order)
+                    .Where(oi => oi.OrderId == orderId).ToList();
+            }
+        }
         public int Update(float? price, int? quantity, string productId, string orderId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))

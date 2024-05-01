@@ -45,6 +45,15 @@ namespace TestShop
                          .FirstOrDefault();
             }
         }
+        public List<ShipmentItem> GetShipmentItemByShipmentId(string shipmentId)
+        {
+            using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
+            {
+                return db.GetTable<ShipmentItem>().LoadWith(lw => lw.Product).LoadWith(lw => lw.Shipment)
+                    .Where(si => si.ShipmentId == shipmentId)
+                    .ToList();
+            }
+        }
 
         public int Update(string shipmentId, string productId, int quantity, float? price)
         {

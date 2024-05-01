@@ -45,6 +45,17 @@ namespace TestShop
                          .FirstOrDefault();
             }
         }
+        public List<CartItem> GetCartItemByCartId(string cartId)
+        {
+            using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
+            {
+                return db.GetTable<CartItem>()
+                    .Where(ci => ci.CartId == cartId)
+                    .LoadWith(lw => lw.Product)
+                    .LoadWith(lw => lw.Cart)
+                    .ToList();
+            }
+        }
 
         public int Update(float? price, int? quantity, string productId, string cartId)
         {

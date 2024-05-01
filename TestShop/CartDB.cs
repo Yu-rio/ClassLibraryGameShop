@@ -42,6 +42,16 @@ namespace TestShop
             }
         }
 
+        public Cart GetByCustomerId(string customerId)
+        {
+            using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
+            {
+                return db.GetTable<Cart>()
+                    .Where(c => c.CustomerId == customerId)
+                    .FirstOrDefault();
+            }
+        }
+
         public int Update(string id, DateTime updatedAt, string customerId)
         {
             using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))

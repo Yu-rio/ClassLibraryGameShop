@@ -41,6 +41,14 @@ namespace TestShop
                     .LoadWith(lw => lw.Genre).LoadWith(lw => lw.Publisher).ToList();
             }
         }
+        public List<Product> GetByCategory(string categoryId)
+        {
+            using (var db = SqlServerTools.CreateDataConnection(CONNECTION_STRING))
+            {
+                return db.GetTable<Product>().Where(p => p.CategoryId == categoryId).LoadWith(lw => lw.Platform).LoadWith(lw => lw.Category)
+                    .LoadWith(lw => lw.Genre).LoadWith(lw => lw.Publisher).ToList();
+            }
+        }
 
         public Product GetById(string productId)
         {
